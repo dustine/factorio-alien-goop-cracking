@@ -4,9 +4,9 @@ Factorio mod, allows for a way to automate alien artifacts "collection" that inc
 
 ## World Spawn
 
-Alien spawners will randomly (low flat chance, in the config.json) have a *oil-like* **resource sprout**. 
+Alien nests will randomly (low flat chance, in the config.json) have a *oil-like* **resource sprout** bellow them. 
 
-Using a *pumpjack* on it will allow you to extract **Alien Extract**. 
+Using a *pumpjack* on it will allow you to extract **Alien Goop**. 
 
 The yield of these camps increase with distance to the spawning-zone, and also depend on map-gen settings *Alien Bases Richness*.
 
