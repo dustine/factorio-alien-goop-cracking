@@ -1,100 +1,134 @@
 local config = require 'config'
 
+config.goopToArtifact = 5;
+
+function union(lht, rht)
+    for k, v in pairs(rht) do
+        if (type(v) == "table") and (type(lht[k] or false) == "table") then
+            union(lht[k], rht[k])
+        else
+            lht[k] = v
+        end
+    end
+    return lht
+end
+
+function newTableFrom(original, parameters)
+  local newObject = table.deepcopy(original)
+  return union(newObject, parameters)
+end
+
+
 -- Achievements
 
 local achievement = {
-  type = 'achievement',
+  type = 'produce-per-hour-achievement',
   name = 'aliengoopcracking-sweet-tooth',
+  item_product= 'aliengoopcracking-cotton-candy',
+  amount = 60,
   order = 'g[secret]-b[sweet-tooth]',
-  icon = '__aliengoopcracking__/graphics/achievement.png'
+  icon = '__aliengoopcracking__/graphics/achievement.png',
+  limited_to_one_game = false
 }
 
 
 -- Entity
 
-local well = table.deepcopy(data.raw['resource']['crude-oil'])
-well.name = 'aliengoopcracking-goop'
-well.minable.results[1].name = 'aliengoopcracking-goop'
+local well = newTableFrom(data.raw['resource']['crude-oil'], {
+  name = 'aliengoopcracking-goop',
+  order = 'a-b-b',
+  minimum = config.minimumGoop,
+  normal = config.baselineGoop,
+  minable = {results = {{name = 'aliengoopcracking-goop'}}},
+  map_color = {r=1.0, g=0.0, b=0.0},
+  icon = '__aliengoopcracking__/graphics/goop.png',
+  stages = {sheet = {filename = '__aliengoopcracking__/graphics/goop-world.png'}}
+})
 well.autoplace = nil
-well.map_color = {r=1.0, g=0.0, b=0.0} -- biter-red?
-well.icon = '__aliengoopcracking__/graphics/goop.png'
-well.stages.sheet.filename = '__aliengoopcracking__/graphics/goop-world.png'
 
 
 -- Fluid
 
-local goop = table.deepcopy(data.raw['fluid']['lubricant'])
-goop.name = 'aliengoopcracking-goop'
-goop.base_color = {r=0.9, g=0.2, b=0.8} -- #E435C9, rounded
-goop.flow_color = {r=1.0, g=0.8, b=1.0} -- #FFD3FF, rounded
-goop.icon = '__aliengoopcracking__/graphics/goop.png'
-
+local goop = newTableFrom(data.raw['fluid']['lubricant'], {
+  name = 'aliengoopcracking-goop',
+  base_color = {r=0.9, g=0.2, b=0.8}, -- #E435C9, rounded
+  flow_color = {r=1.0, g=0.8, b=1.0}, -- #FFD3FF, rounded
+  icon = '__aliengoopcracking__/graphics/goop.png'
+})
 
 -- Item
 
-local itemCC = table.deepcopy(data.raw['capsule']['raw-fish'])
-itemCC.name = 'aliengoopcracking-cotton-candy'
-itemCC.capsule_action.attack_parameters.ammo_type.action.action_delivery.target_effects.damage.amount = -100
-itemCC.order = "g[alien-artifact]-a[cotton-candy]"
-itemCC.icon = '__aliengoopcracking__/graphics/cotton-candy.png'
+local itemCC = newTableFrom(data.raw['capsule']['raw-fish'], {
+  name = 'aliengoopcracking-cotton-candy',
+  capsule_action = {attack_parameters = {ammo_type = {action = {action_delivery = {target_effects = {damage = {amount = -100}}}}}}},
+  order = "g[alien-artifact]-a[cotton-candy]",
+  icon = '__aliengoopcracking__/graphics/cotton-candy.png'
+})
 
-local itemBarrel = table.deepcopy(data.raw['item']['crude-oil-barrel'])
-itemBarrel.name = 'aliengoopcracking-barrel'
-itemBarrel.icon = '__aliengoopcracking__/graphics/barrel.png'
+local itemBarrel = newTableFrom(data.raw['item']['crude-oil-barrel'], {
+  name = 'aliengoopcracking-barrel',
+  icon = '__aliengoopcracking__/graphics/barrel.png'
+})
 
 
 -- Recipe
 
-local congelation = table.deepcopy(data.raw['recipe']['plastic-bar'])
-congelation.name = 'aliengoopcracking-congelation'
-congelation.category = 'chemistry'
-congelation.energy_required = 30
-congelation.ingredients = {
-  {type='fluid', name='aliengoopcracking-goop', amount=60}
-}
-congelation.main_product = ""
-congelation.icon = '__base__/graphics/icons/alien-artifact.png'
-congelation.subgroup = "fluid-recipes"
-congelation.results = {
+function rewriteRecipe(recipe, ingredients, results)
+  recipe.ingredients = ingredients
+  recipe.results = results
+end
+
+local congelation = newTableFrom(data.raw['recipe']['sulfur'], {
+  name = 'aliengoopcracking-congelation',
+  energy_required = 30,
+  main_product = "",
+  icon = '__base__/graphics/icons/alien-artifact.png',
+  subgroup = "raw-material",
+  order = "h[alien-artifact]"
+})
+rewriteRecipe(congelation, {
+  {type='fluid', name='aliengoopcracking-goop', amount=config.goopToArtifact}
+}, {
   {type='item', name='alien-artifact', amount=1}
-}
+})
 
-
-local recipeCC = table.deepcopy(data.raw['recipe']['empty-crude-oil-barrel'])
-recipeCC.name = 'aliengoopcracking-cotton-candy'
-recipeCC.energy_required = 1800
-recipeCC.ingredients = {
-  {type='fluid', name='aliengoopcracking-goop', amount=60},
+local recipeCC = newTableFrom(data.raw['recipe']['empty-crude-oil-barrel'], {
+  name = 'aliengoopcracking-cotton-candy',
+  subgroup = "raw-material",
+  order = "h[alien-artifact]-a[cotton-candy]",
+  energy_required = 1800,
+  icon = '__aliengoopcracking__/graphics/cotton-candy.png',
+})
+rewriteRecipe(recipeCC, {
+  {type='fluid', name='aliengoopcracking-goop', amount=config.goopToArtifact*4}, 
   {type="item", name="raw-fish", amount=1},
-}
-recipeCC.icon = '__aliengoopcracking__/graphics/cotton-candy.png'
-recipeCC.results = {
+}, {
   {type='item', name='aliengoopcracking-cotton-candy', amount=1}
-}
+});
 
-local recipeBarrel = table.deepcopy(data.raw['recipe']['fill-crude-oil-barrel'])
-recipeBarrel.name = 'aliengoopcracking-fill-barrel'
-recipeBarrel.energy_required = 1
-recipeBarrel.ingredients = {
+local recipeBarrel = newTableFrom(data.raw['recipe']['fill-crude-oil-barrel'], {
+  name = 'aliengoopcracking-fill-barrel',
+  energy_required = 1,
+  icon = '__aliengoopcracking__/graphics/fill-barrel.png',
+})
+rewriteRecipe(recipeBarrel, {
   {type="fluid", name="aliengoopcracking-goop", amount=25},
   {type="item", name="empty-barrel", amount=1},
-}
-recipeBarrel.icon = '__aliengoopcracking__/graphics/fill-barrel.png'
-recipeBarrel.results = {
+}, {
   {type="item", name="aliengoopcracking-barrel", amount=1}
-}
+})
 
-local unbarrel = table.deepcopy(data.raw['recipe']['empty-crude-oil-barrel'])
-unbarrel.name = 'aliengoopcracking-empty-barrel'
-unbarrel.energy_required = 1
-unbarrel.ingredients = {
+local unbarrel = newTableFrom(data.raw['recipe']['empty-crude-oil-barrel'], {
+  name = 'aliengoopcracking-empty-barrel',
+  energy_required = 1,
+  icon = '__aliengoopcracking__/graphics/empty-barrel.png'
+})
+rewriteRecipe(unbarrel, {
   {type="item", name="aliengoopcracking-barrel", amount=1}
-}
-unbarrel.icon = '__aliengoopcracking__/graphics/empty-barrel.png'
-unbarrel.results = {
+}, {
   {type="fluid", name="aliengoopcracking-goop", amount=25},
   {type="item", name="empty-barrel", amount=1}
-}
+})
 
 
 -- Technology
@@ -118,4 +152,3 @@ table.insert(data.raw['technology']['fluid-handling'].effects, {
 
 
 data:extend{achievement, well, goop, itemCC, itemBarrel, congelation, recipeCC, recipeBarrel, unbarrel}
-

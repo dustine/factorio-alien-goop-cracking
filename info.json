@@ -1,10 +1,10 @@
  {
      "name": "aliengoopcracking",
-     "version": "0.1.0",
+     "version": "0.2.0",
      "title": "Alien Goop Cracking",
      "author": "Dustine",
      "dependencies": ["base"],
-     "description": "Adds oil-like sprouts that can be drained and processed into Alien artifacts (and cotton candy!). These sprouts only spawn bellow alien bases, and quite rarely at that, so get to exploring!",
+     "description": "Adds oil-like sprouts that can be drained and processed into Alien artifacts (and cotton candy!). These sprouts only spawn bellow alien spawners, and quite rarely at that, so get to exploring!",
      "factorio_version": "0.14",
      "homepage": "https://github.com/dustine/AlienGoopCracking"
  }
