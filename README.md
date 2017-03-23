@@ -10,7 +10,7 @@ Alien nests will randomly have a *oil-like* **resource sprout** below them.
 
 Using a *pumpjack* on it will allow you to extract **Alien Goop**. 
 
-![Imgur](http://i.imgur.com/3j7TOSZ.gifv)
+<blockquote class="imgur-embed-pub" lang="en" data-id="3j7TOSZ"><a href="//imgur.com/3j7TOSZ"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 The yield of these camps increase with distance to the spawning-zone, ~~and also depend on map-gen settings *Alien Bases Richness*~~. This, and other values, can be tweaked in the `config.lua` file.
 
@@ -25,4 +25,4 @@ Also has barreling in case you don't also use a [railtanker mod](https://mods.fa
 ## Wish-list
 
 - Using Alien Bases Richness as another factor for a well's yield
-- Better graphics (I'm sorry 😔)
+- Better graphics (I'm sorry )
