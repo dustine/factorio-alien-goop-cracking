@@ -3,11 +3,11 @@ for index, force in pairs(game.forces) do
   local recipes = force.recipes
 
   if technologies['fluid-handling'].researched then
-    recipes['aliengoopcracking-fill-barrel'].enabled = true
-    recipes['aliengoopcracking-empty-barrel'].enabled = true
+    recipes['alien-goop-cracking-fill-barrel'].enabled = true
+    recipes['alien-goop-cracking-empty-barrel'].enabled = true
   end
   if technologies['alien-technology'].researched then
-    recipes['aliengoopcracking-congelation'].enabled = true
-    recipes['aliengoopcracking-cotton-candy'].enabled = true
+    recipes['alien-goop-cracking-congelation'].enabled = true
+    recipes['alien-goop-cracking-cotton-candy'].enabled = true
   end
 end

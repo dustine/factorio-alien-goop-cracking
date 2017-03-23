@@ -21,7 +21,7 @@ Event.register(defines.events.on_entity_died, function(event)
   if event.entity.type == 'unit-spawner' and math.random() < config.goopChance then
     local pos = Area.center(Entity.to_collision_area(event.entity))
     event.entity.surface.create_entity {
-      name = 'aliengoopcracking-goop', 
+      name = 'alien-goop-cracking-goop', 
       position = pos, 
       amount = calculateAmount(pos)
     }
