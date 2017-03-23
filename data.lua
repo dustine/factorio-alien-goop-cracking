@@ -87,7 +87,8 @@ local congelation = newTableFrom(data.raw['recipe']['sulfur'], {
   order = "h[alien-artifact]"
 })
 rewriteRecipe(congelation, {
-  {type='fluid', name='aliengoopcracking-goop', amount=config.goopToArtifact}
+  {type='fluid', name='aliengoopcracking-goop', amount=config.goopToArtifact},
+  {type='item', name='stone', amount=8}
 }, {
   {type='item', name='alien-artifact', amount=1}
 })
@@ -129,6 +130,11 @@ rewriteRecipe(unbarrel, {
   {type="fluid", name="aliengoopcracking-goop", amount=25},
   {type="item", name="empty-barrel", amount=1}
 })
+
+-- adds support for productivity modules
+for k,v in pairs({'productivity-module', 'productivity-module-2', 'productivity-module-3'}) do
+  table.insert(data.raw['module'][v].limitation, 'aliengoopcracking-congelation')
+end
 
 
 -- Technology

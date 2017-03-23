@@ -16,9 +16,9 @@ The yield of these camps increase with distance to the spawning-zone, ~~and also
 
 ## Recipes
 
-Use a chemical plant to **Congeal Alien Artifacts**, or mix it with fish to get some powered-up **Cotton Candy**. Yummy!
+Use a chemical plant and stone to **Congeal Alien Artifacts**, or mix it with fish to get some powered-up **Cotton Candy**. Yummy!
 
-![All in-game recipes evolving Alien goop](https://i.imgur.com/8dSO2XA.png)
+![All in-game recipes evolving Alien goop](https://i.imgur.com/yw923kg.png)
 
 Also has barreling in case you don't also use a [railtanker mod](https://mods.factorio.com/mods/Choumiko/RailTanker) and really want that sweet, sweet pink juice in your base.
 
