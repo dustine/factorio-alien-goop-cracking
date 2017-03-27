@@ -1,6 +1,6 @@
 -- The chance for alien spawners to spawn Alien goop wells when destroyed.
 -- [min: 0.0, max: 1.0, default: 0.05]
-aliengoopcracking.goopChance = 1
+aliengoopcracking.goopChance = 0.05
 
 -- The chance for Alien goop wells to get boosted when an alien spawner is destroyed above them (if no well is spawned on death). This is rolled per well.
 -- [min: 0.0, max: 1.0, default: 0.20]
