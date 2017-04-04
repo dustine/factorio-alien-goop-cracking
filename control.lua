@@ -1,29 +1,28 @@
-require 'stdlib/area/position'
-require 'stdlib/entity/entity'
-require 'stdlib/event/event'
-require 'stdlib/area/area'
-require 'stdlib/surface'
+local Position = require 'stdlib/area/position'
+local Entity = require 'stdlib/entity/entity'
+local Event = require 'stdlib/event/event'
+local Area = require 'stdlib/area/area'
+-- local Surface = require 'stdlib/surface'
 require 'stdlib/table'
-require 'stdlib/game'
+local table_filter = table.filter
+-- local Game = require 'stdlib/game'
 
 -- should be fine desync-wise as it's loading a local file
-if not aliengoopcracking then
-  aliengoopcracking = {}
-  require 'config'
-end
+aliengoopcracking = {}
+require 'config'
 
-local function distanceToOrigin(pos) 
+local function distanceToOrigin(pos)
   return Position.distance(pos, Position.construct(0,0))
 end
 
-local function calculateAmount(pos) 
+local function calculateAmount(pos)
   -- Magic number: size of a chunk, in tiles (x,y)
   local center = (distanceToOrigin(pos) * aliengoopcracking.increasePerChunk) / 32
   local amount = center + aliengoopcracking.goopVariance * (math.random() - 0.5)
   return math.floor(math.max(aliengoopcracking.minimumGoop, amount * aliengoopcracking.baselineGoop))
 end
 
-local function filterFluids(entity) 
+local function filterFluids(entity)
   return entity.prototype.resource_category == 'basic-fluid'
 end
 
@@ -37,11 +36,11 @@ local function replaceWell(old, new)
   old.destroy()
 end
 
-local function enrichWell(well, amount) 
+local function enrichWell(well, amount)
   if well.name == 'alien-goop-cracking-goop' then
     -- make it super charged
     replaceWell(well, {
-      name = 'alien-goop-cracking-super-goop', 
+      name = 'alien-goop-cracking-super-goop',
       amount = well.amount + amount
     })
   else
@@ -51,10 +50,10 @@ local function enrichWell(well, amount)
 end
 
 local function getCompetitors(surface, area)
-  return table.filter(surface.find_entities_filtered{area = area, type = "resource"}, filterFluids)
+  return table_filter(surface.find_entities_filtered{area = area, type = "resource"}, filterFluids)
 end
 
-local function createGoopWell(surface, area) 
+local function createGoopWell(surface, area)
   local position = Area.center(area)
   local amount = calculateAmount(position)
 
@@ -65,11 +64,11 @@ local function createGoopWell(surface, area)
     surface.create_entity {name = 'alien-goop-cracking-goop', position = position, amount = amount}
   else
     -- can't spawn well, filter extra goop wells
-    local siblings = table.filter(competitors, filterGoopWells)
+    local siblings = table_filter(competitors, filterGoopWells)
     if (#siblings <= 0) then return end
     -- if there's any siblings, enrich them
     local subamount = math.floor(amount / #siblings)
-    for k,well in pairs(siblings) do
+    for _,well in pairs(siblings) do
       enrichWell(well, subamount)
     end
   end
@@ -84,11 +83,11 @@ Event.register(defines.events.on_entity_died, function(event)
       createGoopWell(surface, area)
     else
       local competitors = getCompetitors(surface, area)
-      for k,well in pairs(competitors) do
+      for _,well in pairs(competitors) do
         if math.random() < aliengoopcracking.boostChance then enrichWell(well, 0) end
       end
     end
-  end 
+  end
 end)
 
 -- Event.register(defines.events.on_built_entity, function(event)
