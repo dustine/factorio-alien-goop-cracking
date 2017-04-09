@@ -33,7 +33,14 @@ stds.factorio = {
     },
 
     data = {
-      fields = {'extend'}
+      fields = {
+        raw = {
+          read_only = false,
+          other_fields = true
+        },
+
+        'extend'
+      }
     },
 
     'game', 'script', 'remote', 'defines', 'log', 'serpent', 'data',
