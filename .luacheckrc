@@ -28,14 +28,15 @@ stds.factorio = {
       }
     },
 
-    'game', 'script', 'remote', 'defines', 'log', 'serpent', 'data',
-    --[[
-      stdlib 'globals', modified version with Nexelus's extra libraries
+    table = {
+      fields = {'deepcopy'}
+    },
 
-      Really shouldn't use as globals, safer to use as follows:
-      local Game = require 'stdlib/game'
-    --]]
-    -- 'Data', 'Game', 'Color', 'Event', 'Gui', 'Time', 'Config', 'Logger', 'Proto'
+    data = {
+      fields = {'extend'}
+    },
+
+    'game', 'script', 'remote', 'defines', 'log', 'serpent', 'data',
   }
 }
 

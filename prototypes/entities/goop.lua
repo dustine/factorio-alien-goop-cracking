@@ -1,4 +1,6 @@
-local well = newTableFrom(data.raw['resource']['crude-oil'], {
+local Proto = require 'libs/proto'
+
+local well = Proto.newFrom(data.raw['resource']['crude-oil'], {
   name = 'alien-goop-cracking-goop',
   order = 'a-b-b',
   minimum = aliengoopcracking.minimumGoop,
@@ -10,11 +12,11 @@ local well = newTableFrom(data.raw['resource']['crude-oil'], {
 })
 well.autoplace = nil
 
-local boostedWell = newTableFrom(well, {
-  name = 'alien-goop-cracking-super-goop',
-  stages = {sheet = {filename = '__AlienGoopCracking__/graphics/super-goop-world.png'}},
-  minable = {mining_time = 0.2},
-  map_color = {r=1.0, g=1.0, b=1.0},
+local fluid = Proto.newFrom(data.raw['fluid']['lubricant'], {
+  name = 'alien-goop-cracking-goop',
+  base_color = {r=0.9, g=0.2, b=0.8}, -- #E435C9, rounded
+  flow_color = {r=1.0, g=0.8, b=1.0}, -- #FFD3FF, rounded
+  icon = '__AlienGoopCracking__/graphics/goop.png'
 })
 
-data:extend {well, boostedWell}
+data:extend {well, fluid}
