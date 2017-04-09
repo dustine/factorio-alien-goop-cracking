@@ -5,43 +5,38 @@ local barrel = Proto.newFrom(data.raw['item']['crude-oil-barrel'], {
   icon = '__AlienGoopCracking__/graphics/barrel.png'
 })
 
-
-local recipeFillBase = Proto.newFrom(data.raw['recipe']['fill-crude-oil-barrel'], {
+local fill = Proto.newFrom(data.raw['recipe']['fill-crude-oil-barrel'], {
   name = 'alien-goop-cracking-fill-barrel',
-  energy_required = 1,
   icon = '__AlienGoopCracking__/graphics/fill-barrel.png',
 })
-recipeFillBase.ingredients = {
+fill.ingredients = {
   {type="fluid", name="alien-goop-cracking-goop", amount=25},
   {type="item", name="empty-barrel", amount=1},
 }
-recipeFillBase.results = {
+fill.results = {
   {type="item", name="alien-goop-cracking-barrel", amount=1}
 }
 
 
-local recipeEmptyBase = Proto.newFrom(data.raw['recipe']['empty-crude-oil-barrel'], {
+local empty = Proto.newFrom(data.raw['recipe']['empty-crude-oil-barrel'], {
   name = 'alien-goop-cracking-empty-barrel',
-  energy_required = 1,
   icon = '__AlienGoopCracking__/graphics/empty-barrel.png'
 })
-
-recipeEmptyBase.ingredients = {
+empty.ingredients = {
   {type="item", name="alien-goop-cracking-barrel", amount=1}
 }
-recipeEmptyBase.results = {
+empty.results = {
   {type="fluid", name="alien-goop-cracking-goop", amount=25},
-  {type="item", name="empty-barrel", amount=1}
+  {type="item", name="empty-barrel", amount=1},
 }
 
-
 table.insert(data.raw['technology']['fluid-handling'].effects, {
   type = 'unlock-recipe',
-  recipe = 'alien-goop-cracking-fill-barrel'
+  recipe = fill.name
 })
 table.insert(data.raw['technology']['fluid-handling'].effects, {
   type = 'unlock-recipe',
-  recipe = 'alien-goop-cracking-empty-barrel'
+  recipe = empty.name
 })
 
-data:extend {barrel, recipeEmptyBase, recipeFillBase}
+data:extend {barrel, fill, empty}

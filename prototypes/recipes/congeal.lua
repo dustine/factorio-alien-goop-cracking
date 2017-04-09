@@ -28,3 +28,8 @@ table.insert(data.raw['technology']['alien-technology'].effects, {
 })
 
 data:extend {base}
+
+-- gems: bobplates (config option?)
+-- extra artifacts: bobenemies
+-- ext. crafting: bobenemies
+-- spore crafting: 

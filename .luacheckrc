@@ -44,6 +44,15 @@ stds.factorio = {
     },
 
     'game', 'script', 'remote', 'defines', 'log', 'serpent', 'data',
+
+    -- project specific globals
+    angelsmods = {
+      fields = {'functions', 'refining'}
+    },
+
+    bobmods = {
+      fields = {'plates'}
+    }
   }
 }
 

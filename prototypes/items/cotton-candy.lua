@@ -42,4 +42,4 @@ local achievement = {
   limited_to_one_game = false
 }
 
-data:extend {item, achievement}
+data:extend {item, recipe, achievement}
