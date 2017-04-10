@@ -1,3 +1,2 @@
-require 'prototypes/recipes/update-bacteria'
-require 'prototypes/recipes/update-barrel'
-require 'prototypes/recipes/update-congeal'
+require 'prototypes/recipes/barrel-updates'
+require 'prototypes/recipes/congeal-updates'

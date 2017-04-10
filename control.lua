@@ -1,7 +1,7 @@
 local Position = require 'stdlib/area/position'
 local Entity = require 'stdlib/entity/entity'
-local Event = require 'stdlib/event/event'
 local Area = require 'stdlib/area/area'
+Event = require 'stdlib/event/event'
 -- local Surface = require 'stdlib/surface'
 require 'stdlib/table'
 local table_filter = table.filter
@@ -89,12 +89,3 @@ Event.register(defines.events.on_entity_died, function(event)
     end
   end
 end)
-
--- Event.register(defines.events.on_built_entity, function(event)
---   if event.created_entity.valid and event.created_entity.name == 'alien-goop-cracking-goop' then
---     local surface = event.created_entity.surface
---     local area = Entity.to_collision_area(event.created_entity)
---     event.created_entity.destroy()
---     createGoopWell(surface, area)
---   end
--- end)

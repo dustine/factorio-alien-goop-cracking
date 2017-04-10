@@ -42,3 +42,4 @@ luac.out
 # Project-specific
 .instance
 *.pdn
+*.xcf
