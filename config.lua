@@ -2,9 +2,13 @@
 -- [min: 0.0, max: 1.0, default: 0.05]
 aliengoopcracking.goopChance = 0.05
 
+-- The chance for alien spawners to spawn **Charged** Alien goop wells when destroyed. Rolls only after goopChance (so by default it's 10% of 5% = 1%).
+-- [min: 0.0, max: 1.0, default: 0.10]
+aliengoopcracking.superChance = 0.10
+
 -- The chance for Alien goop wells to get boosted when an alien spawner is destroyed above them (if no well is spawned on death). This is rolled per well.
--- [min: 0.0, max: 1.0, default: 0.20]
-aliengoopcracking.boostChance = 0.20
+-- [min: 0.0, max: 1.0, default: 0.75]
+aliengoopcracking.boostChance = 0.75
 
 -- Minimum amount of Alien goop on wells (when its yield can't decrease anymore).
 -- [min: 0, default: 300]

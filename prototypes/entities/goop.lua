@@ -6,7 +6,7 @@ local well = Proto.newFrom(data.raw['resource']['crude-oil'], {
   minimum = aliengoopcracking.minimumGoop,
   normal = aliengoopcracking.baselineGoop,
   minable = {results = {{name = 'alien-goop-cracking-goop'}}},
-  map_color = {r=1.0, g=0.0, b=0.0},
+  map_color = {r=1.0, g=0.455, b=0.549},
   icon = '__AlienGoopCracking__/graphics/goop.png',
   stages = {sheet = {filename = '__AlienGoopCracking__/graphics/goop-world.png'}}
 })

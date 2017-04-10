@@ -1,11 +1,9 @@
 local Position = require 'stdlib/area/position'
 local Entity = require 'stdlib/entity/entity'
 local Area = require 'stdlib/area/area'
-Event = require 'stdlib/event/event'
--- local Surface = require 'stdlib/surface'
+require 'stdlib/event/event'
 require 'stdlib/table'
 local table_filter = table.filter
--- local Game = require 'stdlib/game'
 
 -- should be fine desync-wise as it's loading a local file
 aliengoopcracking = {}
@@ -61,7 +59,9 @@ local function createGoopWell(surface, area)
 
   if not competitors or #competitors <= 0 then
     -- spawn well, as usual
-    surface.create_entity {name = 'alien-goop-cracking-goop', position = position, amount = amount}
+    local type = 'alien-goop-cracking-goop'
+    if math.random() < aliengoopcracking.superChance then type = 'alien-goop-cracking-super-goop' end
+    surface.create_entity {name = type, position = position, amount = amount}
   else
     -- can't spawn well, filter extra goop wells
     local siblings = table_filter(competitors, filterGoopWells)

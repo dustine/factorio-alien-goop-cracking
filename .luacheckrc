@@ -43,15 +43,15 @@ stds.factorio = {
       }
     },
 
-    'game', 'script', 'remote', 'defines', 'log', 'serpent', 'data',
+    'game', 'script', 'remote', 'defines', 'log', 'serpent', 'data', 'Event',
 
     -- project specific globals
     angelsmods = {
-      fields = {'functions', 'refining'}
+      fields = {'functions', 'refining', 'bioprocessing'}
     },
 
     bobmods = {
-      fields = {'plates'}
+      fields = {'plates', 'enemies'}
     }
   }
 }
