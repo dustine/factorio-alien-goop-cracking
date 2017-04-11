@@ -62,8 +62,14 @@ if bobmods and bobmods.enemies then
     }}
   }}
 
+  -- adds support for productivity modules
+  for _,recipe in pairs({'productivity-module', 'productivity-module-2', 'productivity-module-3'}) do
+    table.insert(data.raw['module'][recipe].limitation, 'alien-goop-cracking-rainbow-congelation')
+  end
+
   table.insert(data.raw['technology']['alien-technology'].effects, {
     type = 'unlock-recipe',
     recipe = 'alien-goop-cracking-rainbow-congelation'
   })
+
 end
