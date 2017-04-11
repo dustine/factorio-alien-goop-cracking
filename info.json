@@ -4,7 +4,7 @@
     "title": "Alien Goop Cracking",
     "author": "Dustine",
     "dependencies": ["base >= 0.14.0", "? angelsbioprocessing >= 0.3.0", "? angelsrefining >= 0.6.0", "? bobenemies >= 0.14.0", "? bobplates >= 0.14.0"],
-    "description": "Adds oil-like sprouts that can be drained and processed into Alien artifacts (and cotton candy!). These sprouts only spawn below alien spawners, and quite rarely at that, so get to exploring!",
+    "description": "Adds oil-like sprouts that can be drained and processed into Alien artifacts (and cotton candy!). These sprouts only spawn below alien spawners, and quite rarely at that, so get to exploring! Now with support for Bob's Artifacts and Angel's Bioprocessing, er, process!",
     "factorio_version": "0.14",
     "homepage": "https://forums.factorio.com/viewtopic.php?f=93&t=43163",
     "repository": "https://github.com/dustine/AlienGoopCracking"

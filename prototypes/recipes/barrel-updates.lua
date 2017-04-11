@@ -7,7 +7,6 @@ local barrel = data.raw.item["alien-goop-cracking-barrel"]
 local fill = data.raw.recipe["alien-goop-cracking-fill-barrel"]
 local empty = data.raw.recipe["alien-goop-cracking-empty-barrel"]
 if (bobmods and water_pump) or (angelsmods and angelbarreling) then
-
   --remove from base tech
   local function remove_tech()
     local techs = data.raw.technology["fluid-handling"] or {}
