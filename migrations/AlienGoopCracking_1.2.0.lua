@@ -25,7 +25,7 @@ if mods.angelsbioprocessing or mods.angelsrefining or mods.bobplates or mods.bob
         end
       end
 
-      -- force.reset_recipes()
+      force.reset_recipes()
     end
 
     -- add new rainbow congealing
@@ -42,6 +42,6 @@ if mods.angelsbioprocessing or mods.angelsrefining or mods.bobplates or mods.bob
       end
     end
 
-    -- force.reset_technologies()
+    force.reset_technologies()
   end
 end
