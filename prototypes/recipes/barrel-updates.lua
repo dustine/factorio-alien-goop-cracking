@@ -2,11 +2,11 @@
 
 --Only run this if water pump or heavy pump is present.
 local water_pump = data.raw.item["water-pump"]
-local heavy_pump = data.raw.item["heavy-pump"]
+local angelbarreling = data.raw["recipe-category"]["angels-barreling"]
 local barrel = data.raw.item["alien-goop-cracking-barrel"]
 local fill = data.raw.recipe["alien-goop-cracking-fill-barrel"]
 local empty = data.raw.recipe["alien-goop-cracking-empty-barrel"]
-if (bobmods and water_pump) or (angelsmods and heavy_pump) then
+if (bobmods and water_pump) or (angelsmods and angelbarreling) then
 
   --remove from base tech
   local function remove_tech()
@@ -22,7 +22,7 @@ if (bobmods and water_pump) or (angelsmods and heavy_pump) then
   end
 
   --Create recipe for angels or bobs. Check angels first
-  if heavy_pump then
+  if angelbarreling then
     if not data.raw["item-subgroup"]["bob-fluid-empty"] then
       data:extend({{
         type = "item-subgroup",
