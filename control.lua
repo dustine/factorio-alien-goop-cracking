@@ -74,8 +74,12 @@ local function createGoopWell(surface, area)
   end
 end
 
+local function shouldSpawn(event)
+  return event.entity.type == 'unit-spawner'
+end
+
 Event.register(defines.events.on_entity_died, function(event)
-  if event.entity.type == 'unit-spawner' then
+  if shouldSpawn(event) then
     local surface = event.entity.surface
     local area = Entity.to_collision_area(event.entity)
 
