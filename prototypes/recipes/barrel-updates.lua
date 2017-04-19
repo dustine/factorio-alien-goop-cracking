@@ -3,6 +3,7 @@
 --Only run this if water pump or heavy pump is present.
 local water_pump = data.raw.item["water-pump"]
 local angelbarreling = data.raw["recipe-category"]["angels-barreling"]
+
 local barrel = data.raw.item["alien-goop-cracking-barrel"]
 local fill = data.raw.recipe["alien-goop-cracking-fill-barrel"]
 local empty = data.raw.recipe["alien-goop-cracking-empty-barrel"]
@@ -13,7 +14,7 @@ if (bobmods and water_pump) or (angelsmods and angelbarreling) then
     for _, tech in pairs({techs}) do
       for i = #tech.effects, 1, -1 do
         local effect = tech.effects[i]
-        if effect.type == "unlock-recipe" and effect.recipe:find("alien%-goop%-cracking%-") then
+        if effect and effect.type == "unlock-recipe" and effect.recipe:find("alien%-goop%-cracking%-") then
           tech.effects[i] = nil
         end
       end
@@ -41,15 +42,17 @@ if (bobmods and water_pump) or (angelsmods and angelbarreling) then
     empty.subgroup = "bob-fluid-empty"
     barrel.subgroup = "bob-fluid-empty"
 
-    remove_tech()
-    table.insert(data.raw['technology']['angels-fluid-barreling'].effects, {
-      type = 'unlock-recipe',
-      recipe = fill.name
-    })
-    table.insert(data.raw['technology']['angels-fluid-barreling'].effects, {
-      type = 'unlock-recipe',
-      recipe = empty.name
-    })
+    if data.raw['technology']['angels-fluid-barreling'] then
+      remove_tech()
+      table.insert(data.raw['technology']['angels-fluid-barreling'].effects, {
+        type = 'unlock-recipe',
+        recipe = fill.name
+      })
+      table.insert(data.raw['technology']['angels-fluid-barreling'].effects, {
+        type = 'unlock-recipe',
+        recipe = empty.name
+      })
+    end
   elseif water_pump then
     fill.category = "water-pump"
     fill.subgroup = "bob-barrel"
@@ -57,14 +60,16 @@ if (bobmods and water_pump) or (angelsmods and angelbarreling) then
     empty.subgroup = "bob-empty-barrel"
     barrel.subgroup = "bob-barrel"
 
-    remove_tech()
-    table.insert(data.raw['technology']['barrels'].effects, {
-      type = 'unlock-recipe',
-      recipe = fill.name
-    })
-    table.insert(data.raw['technology']['barrels'].effects, {
-      type = 'unlock-recipe',
-      recipe = empty.name
-    })
+    if data.raw['technology']['barrels'] then
+      remove_tech()
+      table.insert(data.raw['technology']['barrels'].effects, {
+        type = 'unlock-recipe',
+        recipe = fill.name
+      })
+      table.insert(data.raw['technology']['barrels'].effects, {
+        type = 'unlock-recipe',
+        recipe = empty.name
+      })
+    end
   end
 end
