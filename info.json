@@ -1,6 +1,6 @@
 {
     "name": "AlienGoopCracking",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "title": "Alien Goop Cracking",
     "author": "Dustine",
     "dependencies": ["base >= 0.14.0", "? angelsbioprocessing >= 0.3.0", "? angelsrefining >= 0.6.0", "? bobenemies >= 0.14.0", "? bobplates >= 0.14.0"],
